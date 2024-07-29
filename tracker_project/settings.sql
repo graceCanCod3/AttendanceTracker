@@ -1,0 +1,4 @@
+CREATE DATABASE tracker;
+CREATE USER gracem WITH PASSWORD 'tracker';
+GRANT ALL PRIVILEGES ON DATABASE tracker TO trackeruser;
+ALTER DATABASE tracker OWNER TO trackeruser;
