@@ -13,4 +13,6 @@ router.register(r'attendance', views.AttendanceViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('customusers/', views.CustomUserList.as_view(), name="customuser_list"),
+    path('customusers/<int:pk>', views.CustomUserDetail.as_view(), name="customuser_detail"),
 ]

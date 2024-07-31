@@ -75,3 +75,13 @@ class Attendance(models.Model):
 
     def __str__(self):
         return f"{self.student} - {self.class_session} - {self.status}"
+    
+
+class CustomUser(models.Model):
+    username = models.CharField(max_length=255)
+    password = models.CharField(max_length=255)
+    email = models.EmailField(max_length=254, unique=True, null=False, blank=False)
+
+    def __str__(self):
+        return self.username
+

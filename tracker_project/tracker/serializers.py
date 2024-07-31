@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import ParentContact, Student, Subject, Instructor, Enrollment, ClassSession, Attendance
+from .models import ParentContact, Student, Subject, Instructor, Enrollment, ClassSession, Attendance, CustomUser
 
 class ParentContactSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -47,3 +47,12 @@ class AttendanceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Attendance
         fields = ['url', 'id', 'student', 'class_session', 'status']
+
+class CustomUserSerializer(serializers.HyperlinkedModelSerializer):
+    instructor = InstructorSerializer(
+        many=True,
+        read_only=True
+    )
+    class Meta:
+        model = CustomUser
+        fields = ('id', 'username', 'password', 'email', 'instructor')

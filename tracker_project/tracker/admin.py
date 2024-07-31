@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ParentContact, Student, Subject, Instructor, Enrollment, ClassSession, Attendance
+from .models import ParentContact, Student, Subject, Instructor, Enrollment, ClassSession, Attendance, CustomUser
 
 @admin.register(ParentContact)
 class ParentContactAdmin(admin.ModelAdmin):
@@ -40,3 +40,8 @@ class AttendanceAdmin(admin.ModelAdmin):
     search_fields = ['student__first_name', 'student__last_name']
     autocomplete_fields = ['student', 'class_session']
 
+@admin.register(CustomUser)
+class CustomUserAdmin(admin.ModelAdmin):
+    list_display = ['username', 'email', 'password']
+    search_fields = ['username', 'email']
+    
