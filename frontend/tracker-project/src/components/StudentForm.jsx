@@ -13,21 +13,22 @@ const StudentForm = () => {
     parent_contact: null,
   });
   const navigate = useNavigate();
-
   useEffect(() => {
     if (id) {
       fetchStudent();
     }
-  }, []);
+  }, [id]);
 
   const fetchStudent = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/students/${id}/`);
+      const response = await axios.get(`http://127.0.0.1:8000/api/students/`);
       setStudent(response.data);
     } catch (error) {
       console.error('Error fetching student:', error);
     }
   };
+
+
 
   const handleChange = (e) => {
     setStudent({ ...student, [e.target.name]: e.target.value });

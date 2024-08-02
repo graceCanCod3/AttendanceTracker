@@ -2,21 +2,34 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const StudentList = () => {
+const StudentList = ({user, setUser}) => {
   const [students, setStudents] = useState([]);
 
-  useEffect(() => {
-    getAllStudents()
-  }, [])
-
-  const getAllStudents = async () => {
+  const getUser = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/students');
-      setStudents(response.data)
+        const response = await axios.get('http://localhost:8000/api/customuser')
+        console.log('response: ', response.data);
+        setUser(response.data);
     } catch (error) {
-      console.error('Error fetching students:', error)
+        console.error('Error fetching user data:', error)
     }
-  }
+};
+    useEffect(() => {
+      getUser()
+}, [])
+
+  useEffect(() => {
+      const getAllStudents = async () => {
+        try {
+          const response = await axios.get('http://127.0.0.1:8000/api/students');
+          setStudents(response.data)
+        } catch (error) {
+          console.error('Error fetching students:', error)
+        }
+      }
+      
+      getAllStudents()
+    }, [])
 
   const deleteStudent = async (id) => {
     try {
@@ -30,7 +43,8 @@ const StudentList = () => {
   return (
     <div className='students'>
       <h1>Students</h1>
-      <Link to="/add-student">Add Student</Link>
+      <h2>Nice to have you back {user.username}</h2>
+      {/* <Link to="/add-student">Add Student</Link> */}
       <ul>
         {students.map((student) => (
           <li key={student.id}>

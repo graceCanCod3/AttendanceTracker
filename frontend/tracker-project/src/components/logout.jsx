@@ -9,7 +9,7 @@
     
 //     const handleLogout = async () => {
 //         try {
-//             const response = await axios.post('http://localhost:8000/customusers/');
+//             const response = await axios.post('http://localhost:8000/api/customusers/');
 //             setMessage(response.data.message);
 //             navigate('/')
 //         } catch (error) {

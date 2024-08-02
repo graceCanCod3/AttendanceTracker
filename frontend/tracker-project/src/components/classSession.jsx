@@ -7,17 +7,17 @@ export default function ClassSession() {
   const navigate = useNavigate()
 
   useEffect(() => {
+    
+    const getAllSessions = async () => {
+      try {
+        const response = await axios.get(`http://127.0.0.1:8000/api/classsessions/`)
+        setSessions(response.data)
+      } catch (error) {
+        console.error('Error getting class sessions:', error)
+      }
+    };
     getAllSessions()
   }, [])
-
-  const getAllSessions = async () => {
-    try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/classsessions`)
-      setSessions(response.data)
-    } catch (error) {
-      console.error('Error getting class sessions:', error)
-    }
-  };
 
   const handleSessionClick = (id) => {
     navigate(`/classsessions/${id}`)
