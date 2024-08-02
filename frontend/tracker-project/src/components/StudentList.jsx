@@ -7,7 +7,7 @@ const StudentList = ({user, setUser}) => {
 
   const getUser = async () => {
     try {
-        const response = await axios.get('http://localhost:8000/api/customuser')
+        const response = await axios.get('http://localhost:8000/api/students/')
         console.log('response: ', response.data);
         setUser(response.data)
     } catch (error) {

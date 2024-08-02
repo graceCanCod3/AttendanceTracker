@@ -1,3 +1,4 @@
+
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
@@ -5,13 +6,13 @@ import Levenshtein from 'fast-levenshtein';
 import Logo from '../assets/Logo.svg'
 import './header.css';
 
-
 export default function Header() {
     const [searchQuery, setSearchQuery] = useState('');
     const [userData, setUserData] = useState({});
     const [showUserMenu, setShowUserMenu] = useState(false);
     const [showLoginForm, setShowLoginForm] = useState(false);
     const [formState, setFormState] = useState({ username: '', password: '', error: '' });
+    const [users, setUsers] = useState([]);
     const loginFormRef = useRef(null);
     const userMenuRef = useRef(null);
     const navigate = useNavigate();
@@ -68,13 +69,13 @@ export default function Header() {
             const adjustedSearchQuery = searchQuery.trim().toLowerCase();
 
             const findStudent = students.find(student =>
-                student.student_name.toLowerCase().includes(adjustedSearchQuery)
+                `${student.first_name} ${student.last_name}`.toLowerCase().includes(adjustedSearchQuery)
             );
             const findInstructor = instructors.find(instructor =>
-                instructor.instructor_name.toLowerCase().includes(adjustedSearchQuery)
+                `${instructor.first_name} ${instructor.last_name}`.toLowerCase().includes(adjustedSearchQuery)
             );
             const findSubject = subjects.find(subject =>
-                subject.subject_name.toLowerCase().includes(adjustedSearchQuery)
+                subject.name.toLowerCase().includes(adjustedSearchQuery)
             );
 
             if (findStudent) {
@@ -88,17 +89,17 @@ export default function Header() {
                     ...students.map(student => ({
                         ...student,
                         type: 'student',
-                        similarity: Levenshtein.get(adjustedSearchQuery, student.student_name.toLowerCase())
+                        similarity: Levenshtein.get(adjustedSearchQuery, `${student.first_name} ${student.last_name}`.toLowerCase())
                     })),
                     ...instructors.map(instructor => ({
                         ...instructor,
                         type: 'instructor',
-                        similarity: Levenshtein.get(adjustedSearchQuery, instructor.instructor_name.toLowerCase())
+                        similarity: Levenshtein.get(adjustedSearchQuery, `${instructor.first_name} ${instructor.last_name}`.toLowerCase())
                     })),
                     ...subjects.map(subject => ({
                         ...subject,
                         type: 'subject',
-                        similarity: Levenshtein.get(adjustedSearchQuery, subject.subject_name.toLowerCase())
+                        similarity: Levenshtein.get(adjustedSearchQuery, subject.name.toLowerCase())
                     }))
                 ];
 
@@ -132,7 +133,7 @@ export default function Header() {
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/login/', {
+            const response = await axios.post('http://127.0.0.1:8000/login/', {
                 username: formState.username,
                 password: formState.password,
             });
@@ -166,13 +167,13 @@ export default function Header() {
             </form>
             <div className="headerLinks">
                 <button onClick={() => navigate('/')}>HOME</button>
-                <button onClick={() => navigate('/classsessions/')}>Class-Sessions</button>
+                <button onClick={() => navigate('/classsessions/')}>CLASS-SESSIONS</button>
                 {loggedInUser ? (
                     <div className="userMenu" ref={userMenuRef}>
-                        <img onClick={toggleUserMenu} src={userData.avatar || 'path/to/default/avatar.png'} alt="User Icon" />
+                        <img src="user-icon.png" alt="User" onClick={toggleUserMenu} />
                         {showUserMenu && (
                             <ul className="dropdown">
-                                <li onClick={() => navigate(`/user/${loggedInUser}`)}>My Profile</li>
+                                <li onClick={() => navigate(`/user/${loggedInUser}`)}>My Events</li>
                                 <li onClick={handleLogout}>Logout</li>
                             </ul>
                         )}
@@ -186,7 +187,6 @@ export default function Header() {
                             <input type="text" id="username" placeholder="User Name" onChange={handleLoginChange} />
                             <input type="password" id="password" placeholder="Enter your password" onChange={handleLoginChange} />
                             <button type="submit">Log in</button>
-                            {formState.error && <p>{formState.error}</p>}
                         </form>
                     </div>
                 )}
