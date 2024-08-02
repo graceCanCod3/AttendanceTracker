@@ -1,9 +1,8 @@
-
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import Levenshtein from 'fast-levenshtein';
-import Logo from '../assets/Logo.svg'
+import Logo from '../assets/Logo.svg';
 import './header.css';
 
 export default function Header() {
@@ -12,7 +11,6 @@ export default function Header() {
     const [showUserMenu, setShowUserMenu] = useState(false);
     const [showLoginForm, setShowLoginForm] = useState(false);
     const [formState, setFormState] = useState({ username: '', password: '', error: '' });
-    const [users, setUsers] = useState([]);
     const loginFormRef = useRef(null);
     const userMenuRef = useRef(null);
     const navigate = useNavigate();
@@ -133,7 +131,7 @@ export default function Header() {
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://127.0.0.1:8000/login/', {
+            const response = await axios.post('http://127.0.0.1:8000/api/login/', {
                 username: formState.username,
                 password: formState.password,
             });
@@ -167,13 +165,13 @@ export default function Header() {
             </form>
             <div className="headerLinks">
                 <button onClick={() => navigate('/')}>HOME</button>
-                <button onClick={() => navigate('/classsessions/')}>CLASS-SESSIONS</button>
+                <button onClick={() => navigate('/classsessions/')}>Class Sessions</button>
                 {loggedInUser ? (
                     <div className="userMenu" ref={userMenuRef}>
-                        <img src="user-icon.png" alt="User" onClick={toggleUserMenu} />
+                        <img onClick={toggleUserMenu} src={userData.avatar || 'path/to/default/avatar.png'} alt="User Icon" />
                         {showUserMenu && (
                             <ul className="dropdown">
-                                <li onClick={() => navigate(`/user/${loggedInUser}`)}>My Events</li>
+                                <li onClick={() => navigate(`/user/${loggedInUser}`)}>My Profile</li>
                                 <li onClick={handleLogout}>Logout</li>
                             </ul>
                         )}
@@ -194,5 +192,3 @@ export default function Header() {
         </div>
     );
 }
-
-
