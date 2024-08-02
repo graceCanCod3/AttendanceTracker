@@ -7,6 +7,8 @@ import Login from './login'
 import ParentForm from './ParentForm'
 import ParentContact from './parentContact'
 import ParentList from './ParentList'
+import Instructors from './instructors'
+import InstructorDetail from './InstructorDetail'
 import { useState } from 'react'
 
 
@@ -19,6 +21,8 @@ export default function body () {
 
      <Routes>
           <Route exact path="/" element={<StudentList user={user} setUser={setUser}/>} />
+          <Route path="/instructors" element={<Instructors />} />
+          <Route path="/instructors/:id" element={<InstructorDetail />} />
           <Route path="/classsessions/" element={<ClassSession/>} />
           <Route path="/students/:id" element={<StudentDetail/>} />
           <Route path="/parentcontacts/:id" element={<ParentList />} />
