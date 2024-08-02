@@ -5,6 +5,8 @@ import './ClassSession.css';
 
 export default function ClassSession() {
     const [sessions, setSessions] = useState([]);
+    const [subjects, setSubjects] = useState([]);
+    const [instructors, setInstructors] = useState([]);
     const [formState, setFormState] = useState({
         id: null,
         subject: '',
@@ -28,8 +30,8 @@ export default function ClassSession() {
                     const instructorResponse = await axios.get(session.instructor);
                     return {
                         ...session,
-                        subject: subjectResponse.data.name,
-                        instructor: `${instructorResponse.data.first_name} ${instructorResponse.data.last_name}`
+                        subjectName: subjectResponse.data.name,
+                        instructorName: `${instructorResponse.data.first_name} ${instructorResponse.data.last_name}`
                     };
                 }));
 
@@ -38,7 +40,28 @@ export default function ClassSession() {
                 console.error('Error getting class sessions:', error);
             }
         };
+
+        const getAllSubjects = async () => {
+            try {
+                const response = await axios.get('http://127.0.0.1:8000/api/subjects/');
+                setSubjects(response.data);
+            } catch (error) {
+                console.error('Error getting subjects:', error);
+            }
+        };
+
+        const getAllInstructors = async () => {
+            try {
+                const response = await axios.get('http://127.0.0.1:8000/api/instructors/');
+                setInstructors(response.data);
+            } catch (error) {
+                console.error('Error getting instructors:', error);
+            }
+        };
+
         getAllSessions();
+        getAllSubjects();
+        getAllInstructors();
     }, []);
 
     const handleInputChange = (e) => {
@@ -51,8 +74,8 @@ export default function ClassSession() {
         if (session) {
             setFormState({
                 id: session.id,
-                subject: session.subject,
-                instructor: session.instructor,
+                subject: session.subject, // This should be the URL
+                instructor: session.instructor, // This should be the URL
                 date: session.date,
                 start_time: session.start_time,
                 end_time: session.end_time,
@@ -75,13 +98,25 @@ export default function ClassSession() {
         e.preventDefault();
         try {
             if (editMode) {
-                const response = await axios.put(`http://127.0.0.1:8000/api/classsessions/${formState.id}/`, formState);
+                const response = await axios.put(`http://127.0.0.1:8000/api/classsessions/${formState.id}/`, {
+                    ...formState
+                });
                 const updatedSession = response.data;
+                const subjectResponse = await axios.get(updatedSession.subject);
+                const instructorResponse = await axios.get(updatedSession.instructor);
+                updatedSession.subjectName = subjectResponse.data.name;
+                updatedSession.instructorName = `${instructorResponse.data.first_name} ${instructorResponse.data.last_name}`;
                 setSessions(sessions.map(session => (session.id === updatedSession.id ? updatedSession : session)));
                 setEditMode(false);
             } else {
-                const response = await axios.post('http://127.0.0.1:8000/api/classsessions/', formState);
+                const response = await axios.post('http://127.0.0.1:8000/api/classsessions/', {
+                    ...formState
+                });
                 const newSession = response.data;
+                const subjectResponse = await axios.get(newSession.subject);
+                const instructorResponse = await axios.get(newSession.instructor);
+                newSession.subjectName = subjectResponse.data.name;
+                newSession.instructorName = `${instructorResponse.data.first_name} ${instructorResponse.data.last_name}`;
                 setSessions([...sessions, newSession]);
             }
             setFormState({
@@ -102,22 +137,18 @@ export default function ClassSession() {
         <div>
             <h1>Class Sessions</h1>
             <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    name="subject"
-                    value={formState.subject}
-                    onChange={handleInputChange}
-                    placeholder="Subject"
-                    required
-                />
-                <input
-                    type="text"
-                    name="instructor"
-                    value={formState.instructor}
-                    onChange={handleInputChange}
-                    placeholder="Instructor"
-                    required
-                />
+                <select name="subject" value={formState.subject} onChange={handleInputChange} required>
+                    <option value="">Select Subject</option>
+                    {subjects.map(subject => (
+                        <option key={subject.url} value={subject.url}>{subject.name}</option>
+                    ))}
+                </select>
+                <select name="instructor" value={formState.instructor} onChange={handleInputChange} required>
+                    <option value="">Select Instructor</option>
+                    {instructors.map(instructor => (
+                        <option key={instructor.url} value={instructor.url}>{instructor.first_name} {instructor.last_name}</option>
+                    ))}
+                </select>
                 <input
                     type="date"
                     name="date"
@@ -154,8 +185,8 @@ export default function ClassSession() {
             <ul>
                 {sessions.map(session => (
                     <li key={session.id}>
-                        <p><strong>Subject:</strong> {session.subject}</p>
-                        <p><strong>Instructor:</strong> {session.instructor}</p>
+                        <p><strong>Subject:</strong> {session.subjectName}</p>
+                        <p><strong>Instructor:</strong> {session.instructorName}</p>
                         <p><strong>Date:</strong> {session.date}</p>
                         <p><strong>Time:</strong> {session.start_time} - {session.end_time}</p>
                         <p><strong>Day Type:</strong> {session.day_type}</p>
@@ -167,5 +198,4 @@ export default function ClassSession() {
         </div>
     );
 }
-
 
