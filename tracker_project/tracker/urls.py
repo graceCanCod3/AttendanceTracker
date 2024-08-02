@@ -15,4 +15,7 @@ urlpatterns = [
     path('', include(router.urls)),
     path('customusers/', views.CustomUserList.as_view(), name="customuser_list"),
     path('customusers/<int:pk>', views.CustomUserDetail.as_view(), name="customuser_detail"),
+    path('customusers/<int:customuser_id>/add_instructor/', views.add_instructor_to_customuser, name='add_instructor_to_customuser'),
+    path('customusers/<int:customuser_id>/remove_instructor/', views.remove_instructor_from_customuser, name='remove_instructor_from_customuser'),
+    path('login/', views.login_user, name='login_user'),
 ]

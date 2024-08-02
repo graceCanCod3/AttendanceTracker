@@ -1,0 +1,153 @@
+/* General styling for the header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the logo */
+.logo {
+    height: 50px;
+    cursor: pointer;
+}
+
+/* Styling for the search form */
+.searchForm {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    margin: 0 20px;
+}
+
+.searchBar {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.searchBtn {
+    padding: 8px 15px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.searchBtn:hover {
+    background-color: #0056b3;
+}
+
+/* Styling for the header links */
+.headerLinks {
+    display: flex;
+    align-items: center;
+}
+
+.headerLinks button {
+    margin: 0 10px;
+    padding: 8px 15px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    color: #007bff;
+}
+
+.headerLinks button:hover {
+    color: #0056b3;
+}
+
+/* Styling for the user menu */
+.userMenu {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.userMenu img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    min-width: 150px;
+    z-index: 1000;
+}
+
+.dropdown li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown li:hover {
+    background-color: #f8f9fa;
+}
+
+/* Styling for the login form */
+.loginOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loginForm {
+    background: white;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.loginForm input {
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.loginForm button {
+    padding: 8px 15px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.loginForm button:hover {
+    background-color: #0056b3;
+}
+
+.loginForm p {
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
+}

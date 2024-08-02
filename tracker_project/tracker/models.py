@@ -78,9 +78,10 @@ class Attendance(models.Model):
     
 
 class CustomUser(models.Model):
-    username = models.CharField(max_length=255)
+    username = models.CharField(max_length=255, unique=True)
     password = models.CharField(max_length=255)
     email = models.EmailField(max_length=254, unique=True, null=False, blank=False)
+    instructors = models.ManyToManyField(Instructor, related_name='customusers')
 
     def __str__(self):
         return self.username
