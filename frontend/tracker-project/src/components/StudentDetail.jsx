@@ -1,35 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const StudentDetail = () => {
-  const { id } = useParams();
-  const [student, setStudent] = useState(null);
-  const navigate = useNavigate();
+  const { id } = useParams()
+  const [student, setStudent] = useState(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
-    fetchStudent();
+    getStudent()
   }, []);
 
-  const fetchStudent = async () => {
+  const getStudent = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/students/${id}/`);
-      setStudent(response.data);
+      const response = await axios.get(`http://127.0.0.1:8000/api/students/${id}`)
+      setStudent(response.data)
     } catch (error) {
-      console.error('Error fetching student:', error);
+      console.error('Error getting student:', error)
     }
-  };
+  }
 
   const deleteStudent = async () => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/api/students/${id}/`);
+      await axios.delete(`http://127.0.0.1:8000/api/students/${id}`)
       navigate('/');
     } catch (error) {
-      console.error('Error deleting student:', error);
+      console.error('Error deleting student:', error)
     }
-  };
+  }
 
-  if (!student) return <div>Loading...</div>;
+  if (!student) return <div>Loading...</div>
 
   return (
     <div>
@@ -40,7 +40,7 @@ const StudentDetail = () => {
       <button onClick={deleteStudent}>Delete</button>
       <button onClick={() => navigate(`/edit-student/${id}`)}>Edit</button>
     </div>
-  );
-};
+  )
+}
 
-export default StudentDetail;
+export default StudentDetail

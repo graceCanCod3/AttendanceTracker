@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const StudentList = ({user, setUser}) => {
-  const [students, setStudents] = useState([]);
+  const [students, setStudents] = useState([])
 
   const getUser = async () => {
     try {
         const response = await axios.get('http://localhost:8000/api/customuser')
         console.log('response: ', response.data);
-        setUser(response.data);
+        setUser(response.data)
     } catch (error) {
         console.error('Error fetching user data:', error)
     }
@@ -21,7 +21,7 @@ const StudentList = ({user, setUser}) => {
   useEffect(() => {
       const getAllStudents = async () => {
         try {
-          const response = await axios.get('http://127.0.0.1:8000/api/students');
+          const response = await axios.get('http://127.0.0.1:8000/api/students')
           setStudents(response.data)
         } catch (error) {
           console.error('Error fetching students:', error)
@@ -57,4 +57,4 @@ const StudentList = ({user, setUser}) => {
   );
 };
 
-export default StudentList;
+export default StudentList
