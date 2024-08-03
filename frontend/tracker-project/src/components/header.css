@@ -1,144 +1,157 @@
-.header {
+
+  .header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    background-color: #333;
-    color: white;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #FFF0E5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 105em;
+  }
+  
+  .logo {
+    height: 60px;
+    cursor: pointer;
+  }
+  
+  .searchForm {
+    display: flex;
+    flex-grow: 1;
+    max-width: 200px;
+    margin: 0 20px;
+  }
+  
+  .header .searchBar {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #FF9966;
+    border-radius: 5px 0 0 5px;
+    font-size: 1em;
+    left: 29px;
+  }
+  
+  .searchBtn {
     padding: 10px 20px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.logo {
-    height: 40px;
-    cursor: pointer;
-}
-
-.searchForm {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-    margin-left: 20px;
-}
-
-.searchBar {
-    flex-grow: 1;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 4px;
-    margin-right: 10px;
-    font-size: 16px;
-}
-
-.searchBtn {
-    padding: 8px 16px;
-    background-color: #007BFF;
+    background-color: #FF9966;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 0 5px 5px 0;
     cursor: pointer;
-    font-size: 16px;
-}
-
-.searchBtn:hover {
-    background-color: #0056b3;
-}
-
-.headerLinks {
+    transition: background-color 0.3s ease;
+  }
+  
+  .searchBtn:hover {
+    background-color: #FF7F40;
+  }
+  
+  .headerLinks {
     display: flex;
     align-items: center;
-}
-
-.headerLinks button {
-    background: none;
+  }
+  
+  .headerLinks button {
+    margin-left: 15px;
+    padding: 8px 15px;
+    background-color: transparent;
+    color: #4A4A4A;
     border: none;
-    color: white;
-    font-size: 16px;
     cursor: pointer;
-    margin-left: 20px;
-}
-
-.headerLinks button:hover {
-    text-decoration: underline;
-}
-
-.userMenu {
+    transition: color 0.3s ease;
+  }
+  
+  .headerLinks button:hover {
+    color: #FF9966;
+  }
+  
+  .userMenu {
     position: relative;
-}
-
-.userMenu img {
-    height: 40px;
+  }
+  
+  .userMenu img {
     width: 40px;
+    height: 40px;
     border-radius: 50%;
     cursor: pointer;
-}
-
-.dropdown {
+  }
+  
+  .dropdown {
     position: absolute;
-    top: 50px;
+    top: 100%;
     right: 0;
-    background-color: #444;
-    border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    z-index: 1000;
-}
-
-.dropdown li {
-    list-style: none;
-    padding: 10px 20px;
+    background-color: #FFF9F5;
+    border: 1px solid #FF9966;
+    border-radius: 5px;
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dropdown li {
+    padding: 8px 15px;
     cursor: pointer;
-    color: white;
-}
-
-.dropdown li:hover {
-    background-color: #555;
-}
-
-.loginOverlay {
+    transition: background-color 0.3s ease;
+  }
+  
+  .dropdown li:hover {
+    background-color: #FFF0E5;
+  }
+  
+  .loginOverlay {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100%;
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
-    align-items: center;
     justify-content: center;
-}
-
-.loginForm {
-    background-color: #333;
+    align-items: center;
+  }
+  
+  .loginForm {
+    background-color: #FFF9F5;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.loginForm input {
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .loginForm input {
     display: block;
     width: 100%;
-    padding: 8px 12px;
+    padding: 10px;
     margin-bottom: 10px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-.loginForm button {
-    padding: 10px 20px;
-    background-color: #007BFF;
+    border: 1px solid #FF9966;
+    border-radius: 5px;
+  }
+  
+  .loginForm button {
+    width: 100%;
+    padding: 10px;
+    background-color: #FF9966;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
-}
-
-.loginForm button:hover {
-    background-color: #0056b3;
-}
-
-.loginForm input::placeholder {
-    color: #bbb;
-}
+    transition: background-color 0.3s ease;
+  }
+  
+  .loginForm button:hover {
+    background-color: #FF7F40;
+  }
+  
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      padding: 15px;
+    }
+  
+    .searchForm {
+      margin: 15px 0;
+      max-width: 100%;
+    }
+  
+    .headerLinks {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+  

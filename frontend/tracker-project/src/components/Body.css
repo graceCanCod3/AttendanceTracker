@@ -1,0 +1,40 @@
+
+  .body-content {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--primary-bg);
+    min-height: calc(100vh - var(--header-height));
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100vw;
+  }
+  
+  .centered-content {
+    max-width: 400px; /* Adjust this value as needed */
+    margin: 0 auto;
+  }
+  
+  .page-title {
+    color: var(--accent-color);
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .content-wrapper {
+    background-color: var(--secondary-bg);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (max-width: 768px) {
+    .main-content {
+      padding: 10px;
+    }
+  
+    .content-wrapper {
+      padding: 15px;
+    }
+  }
+  

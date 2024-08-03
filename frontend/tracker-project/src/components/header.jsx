@@ -1,56 +1,56 @@
-import { useNavigate } from 'react-router-dom';
-import { useEffect, useState, useRef } from 'react';
-import axios from 'axios';
-import Levenshtein from 'fast-levenshtein';
-import Logo from '../assets/Logo.svg';
+import { useNavigate } from 'react-router-dom'
+import { useEffect, useState, useRef } from 'react'
+import axios from 'axios'
+import Levenshtein from 'fast-levenshtein'
+import Logo from '../assets/Logo.svg'
 import User from '../assets/User.svg'
-import './header.css';
+import './header.css'
 
 export default function Header() {
-    const [searchQuery, setSearchQuery] = useState('');
-    const [userData, setUserData] = useState({});
-    const [showUserMenu, setShowUserMenu] = useState(false);
-    const [showLoginForm, setShowLoginForm] = useState(false);
-    const [formState, setFormState] = useState({ username: '', password: '', error: '' });
-    const loginFormRef = useRef(null);
-    const userMenuRef = useRef(null);
-    const navigate = useNavigate();
-    const loggedInUser = localStorage.getItem('loggedInUser');
+    const [searchQuery, setSearchQuery] = useState('')
+    const [userData, setUserData] = useState({})
+    const [showUserMenu, setShowUserMenu] = useState(false)
+    const [showLoginForm, setShowLoginForm] = useState(false)
+    const [formState, setFormState] = useState({ username: '', password: '', error: '' })
+    const loginFormRef = useRef(null)
+    const userMenuRef = useRef(null)
+    const navigate = useNavigate()
+    const loggedInUser = localStorage.getItem('loggedInUser')
 
     useEffect(() => {
         if (loggedInUser) {
             const getUserData = async (userId) => {
                 try {
-                    const response = await axios.get(`http://127.0.0.1:8000/api/customusers/${userId}/`);
-                    setUserData(response.data);
+                    const response = await axios.get(`http://127.0.0.1:8000/api/customusers/${userId}/`)
+                    setUserData(response.data)
                 } catch (error) {
-                    console.error('Error fetching user data:', error);
+                    console.error('Error locatining user data:', error)
                 }
             };
-            getUserData(loggedInUser);
+            getUserData(loggedInUser)
         }
-    }, [loggedInUser]);
+    }, [loggedInUser])
 
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
-                setShowUserMenu(false);
+                setShowUserMenu(false)
             }
             if (loginFormRef.current && !loginFormRef.current.contains(event.target)) {
-                setShowLoginForm(false);
+                setShowLoginForm(false)
             }
-        };
+        }
 
-        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener('mousedown', handleClickOutside)
 
         return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [])
 
     const handleSearchChange = (e) => {
-        setSearchQuery(e.target.value);
-    };
+        setSearchQuery(e.target.value)
+    }
 
     const handleSearchSubmit = async (e) => {
         e.preventDefault();
@@ -61,28 +61,28 @@ export default function Header() {
                 axios.get('http://127.0.0.1:8000/api/subjects/')
             ]);
 
-            const students = studentsResponse.data;
-            const instructors = instructorsResponse.data;
-            const subjects = subjectsResponse.data;
+            const students = studentsResponse.data
+            const instructors = instructorsResponse.data
+            const subjects = subjectsResponse.data
 
-            const adjustedSearchQuery = searchQuery.trim().toLowerCase();
+            const adjustedSearchQuery = searchQuery.trim().toLowerCase()
 
             const findStudent = students.find(student =>
                 `${student.first_name} ${student.last_name}`.toLowerCase().includes(adjustedSearchQuery)
-            );
+            )
             const findInstructor = instructors.find(instructor =>
                 `${instructor.first_name} ${instructor.last_name}`.toLowerCase().includes(adjustedSearchQuery)
-            );
+            )
             const findSubject = subjects.find(subject =>
                 subject.name.toLowerCase().includes(adjustedSearchQuery)
-            );
+            )
 
             if (findStudent) {
-                navigate(`/students/${findStudent.id}`);
+                navigate(`/students/${findStudent.id}`)
             } else if (findInstructor) {
-                navigate(`/instructors/${findInstructor.id}`);
+                navigate(`/instructors/${findInstructor.id}`)
             } else if (findSubject) {
-                navigate(`/subjects/${findSubject.id}`);
+                navigate(`/subjects/${findSubject.id}`)
             } else {
                 const potentialMatches = [
                     ...students.map(student => ({
@@ -112,43 +112,43 @@ export default function Header() {
                 });
             }
         } catch (error) {
-            console.error('Error fetching data:', error);
-            alert('There was an error processing your search.');
+            console.error('Error locatinging data:', error)
+            alert('There was an error processing your search.')
         }
-    };
+    }
 
     const toggleUserMenu = () => {
-        setShowUserMenu(!showUserMenu);
-    };
+        setShowUserMenu(!showUserMenu)
+    }
 
     const toggleLoginForm = () => {
-        setShowLoginForm(!showLoginForm);
-    };
+        setShowLoginForm(!showLoginForm)
+    }
 
     const handleLoginChange = (e) => {
-        setFormState({ ...formState, [e.target.id]: e.target.value, error: '' });
-    };
+        setFormState({ ...formState, [e.target.id]: e.target.value, error: '' })
+    }
 
     const handleLoginSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
         try {
             const response = await axios.post('http://127.0.0.1:8000/api/login/', {
                 username: formState.username,
                 password: formState.password,
             });
             localStorage.setItem('loggedInUser', response.data.id);
-            setShowLoginForm(false);
-            window.location.reload();
+            setShowLoginForm(false)
+            window.location.reload()
         } catch (error) {
-            setFormState({ ...formState, error: 'Invalid username or password' });
+            setFormState({ ...formState, error: 'Invalid username or password' })
         }
-    };
+    }
 
     const handleLogout = () => {
-        localStorage.removeItem('loggedInUser');
-        setShowUserMenu(false);
-        window.location.reload();
-    };
+        localStorage.removeItem('loggedInUser')
+        setShowUserMenu(false)
+        window.location.reload()
+    }
 
     return (
         <div className="header">
@@ -191,5 +191,5 @@ export default function Header() {
                 )}
             </div>
         </div>
-    );
+    )
 }

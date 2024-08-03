@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, Link } from "react-router-dom"
 import axios from 'axios' 
+import './ParentList.css'
 
 export default function ParentList () {
     const [parent, setParent] = useState(null)
     const {id} = useParams()
+    
     useEffect(() => {
         const parentData = async () => {
             try {
@@ -18,22 +20,24 @@ export default function ParentList () {
                 console.error('Error grabbing parent', error)
             }
         }
-    parentData()
+        parentData()
     }, [id])
+    
     if (!parent) {
-        return <div>Loading...</div>
+        return <div className="loading">Loading...</div>
     }
 
     return (
-    <div className = 'Parent'>
-       <h1>Parent page</h1>
-             <h2>First Name: {parent.first_name}</h2>
-             <h3>Last Name: {parent.last_name}</h3>
-             <h3>Phone: {parent.phone}</h3>
-             <h4>Email: {parent.email}</h4>
-             <p>Address: {parent.address}</p>
-                <Link to={`/parentcontacts/${id}/update`}>Update Parent</Link>
-           </div>
+        <div className="content-wrapper">
+            <h1 className="page-title">Parent Information</h1>
+            <h2>First Name: {parent.first_name}</h2>
+            <h2>Last Name: {parent.last_name}</h2>
+            <h3>Phone: {parent.phone}</h3>
+            <h3>Email: {parent.email}</h3>
+            <p>Address: {parent.address}</p>
+            <Link to={`/parentcontacts/${id}/update`}>Update Parent</Link>
+        </div>
     )
 }
+
 

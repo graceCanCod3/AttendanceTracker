@@ -1,0 +1,81 @@
+/* ParentList.css */
+
+:root {
+    --primary-bg: #FFF9F5;
+    --secondary-bg: #FFF0E5;
+    --primary-text: #4A4A4A;
+    --secondary-text: #7C7C7C;
+    --accent-color: #FF9966;
+    --accent-hover: #FF7F40;
+    --link-color: #66B3FF;
+    --link-hover: #3399FF;
+  }
+  
+  .Parent {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: var(--secondary-bg);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .Parent h1 {
+    color: var(--accent-color);
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .Parent h2, .Parent h3, .Parent h4, .Parent p {
+    color: var(--primary-text);
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: var(--primary-bg);
+    border-radius: 5px;
+  }
+  
+  .Parent h2 {
+    font-size: 1.5em;
+  }
+  
+  .Parent h3 {
+    font-size: 1.3em;
+  }
+  
+  .Parent h4 {
+    font-size: 1.1em;
+  }
+  
+  .Parent p {
+    font-size: 1em;
+  }
+  
+  .Parent a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: var(--link-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .Parent a:hover {
+    background-color: var(--link-hover);
+  }
+  
+  .loading {
+    text-align: center;
+    color: var(--secondary-text);
+    font-size: 1.2em;
+    margin-top: 50px;
+  }
+  
+  @media (max-width: 600px) {
+    .Parent {
+      padding: 20px;
+    }
+  }
+  

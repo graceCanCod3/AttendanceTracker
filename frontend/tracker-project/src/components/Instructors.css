@@ -1,0 +1,70 @@
+:root {
+    --primary-bg: #FFF9F5;
+    --secondary-bg: #FFF0E5;
+    --primary-text: #4A4A4A;
+    --secondary-text: #7C7C7C;
+    --accent-color: #FF9966;
+    --accent-hover: #FF7F40;
+    --link-color: #66B3FF;
+    --link-hover: #3399FF;
+  }
+  
+  .instructors-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: var(--secondary-bg);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .instructors-container h1 {
+    color: var(--accent-color);
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .instructors-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .instructor-item {
+    background-color: var(--primary-bg);
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .instructor-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .instructor-link {
+    display: block;
+    padding: 15px 20px;
+    color: var(--primary-text);
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+  }
+  
+  .instructor-link:hover {
+    color: var(--link-hover);
+  }
+  
+  @media (max-width: 600px) {
+    .instructors-container {
+      padding: 20px;
+    }
+  
+    .instructors-container h1 {
+      font-size: 1.8em;
+    }
+  
+    .instructor-link {
+      font-size: 1em;
+    }
+  }

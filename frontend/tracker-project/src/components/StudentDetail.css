@@ -1,0 +1,101 @@
+:root {
+    --primary-bg: #FFF9F5;
+    --secondary-bg: #FFF0E5;
+    --primary-text: #4A4A4A;
+    --secondary-text: #7C7C7C;
+    --accent-color: #FF9966;
+    --accent-hover: #FF7F40;
+    --delete-button: #FF6B6B;
+    --delete-hover: #FF4F4F;
+    --edit-button: #66B3FF;
+    --edit-hover: #3399FF;
+  }
+  
+  .student-detail {
+    max-width: 600px;
+    margin: 3em auto;
+    margin-top: 8em;
+    padding: 30px;
+    background-color: var(--secondary-bg);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .student-detail h1 {
+    color: var(--accent-color);
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .student-info {
+    margin-bottom: 25px;
+  }
+  
+  .student-info p {
+    color: var(--primary-text);
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: var(--primary-bg);
+    border-radius: 5px;
+  }
+  
+  .student-info p strong {
+    color: var(--secondary-text);
+    margin-right: 10px;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+  
+  .button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .delete-button {
+    background-color: var(--delete-button);
+  }
+  
+  .delete-button:hover {
+    background-color: var(--delete-hover);
+  }
+  
+  .edit-button {
+    background-color: var(--edit-button);
+  }
+  
+  .edit-button:hover {
+    background-color: var(--edit-hover);
+  }
+  
+  .loading {
+    text-align: center;
+    color: var(--secondary-text);
+    font-size: 1.2em;
+    margin-top: 50px;
+  }
+  
+  @media (max-width: 600px) {
+    .student-detail {
+      padding: 20px;
+    }
+  
+    .button-group {
+      flex-direction: column;
+    }
+  
+    .button {
+      margin-bottom: 10px;
+    }
+  }
+  

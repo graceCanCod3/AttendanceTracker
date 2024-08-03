@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import './StudentList.css'
+
 // import Carousel from 'react-bootstrap/Carousel'
 
 
@@ -43,20 +45,24 @@ const StudentList = ({user, setUser}) => {
   };
 
   return (
+
     <div className='students'>
       <h1>Enrolled Students</h1>
       <h2>{user.username}</h2>
-      {/* <Link to="/add-student">Add Student</Link> */}
-      <ul>
+      <ul className="student-list">
         {students.map((student) => (
-          <li key={student.id}>
-            <Link to={`/students/${student.id}`}>{student.first_name} {student.last_name}</Link>
-            <button onClick={() => deleteStudent(student.id)}>Delete</button>
+          <li key={student.id} className="student-item">
+            <Link to={`/students/${student.id}`} className="student-link">
+              {student.first_name} {student.last_name}
+            </Link>
+
           </li>
         ))}
       </ul>
     </div>
+    
   );
+  
 };
 
 export default StudentList

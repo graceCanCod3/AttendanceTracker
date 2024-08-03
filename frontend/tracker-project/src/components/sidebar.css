@@ -1,48 +1,67 @@
+:root {
+  --primary-bg: #FFF9F5;
+  --secondary-bg: #FFF0E5;
+  --primary-text: #4A4A4A;
+  --secondary-text: #7C7C7C;
+  --accent-color: #FF9966;
+  --accent-hover: #FF7F40;
+  --link-color: #66B3FF;
+  --link-hover: #3399FF;
+}
+
 .sidebar {
-    width: 250px;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #333;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    padding-top: 20px;
+  width: 250px;
+  height: 100vh;
+  background-color: var(--secondary-bg);
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
 }
 
 .sidebar-section {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .sidebar-section button {
-    width: 100%;
-    background: none;
-    border: none;
-    color: #fff;
-    text-align: left;
-    padding: 10px 20px;
-    font-size: 18px;
-    cursor: pointer;
-    outline: none;
+  width: 100%;
+  padding: 10px;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .sidebar-section button:hover {
-    background-color: #444;
+  background-color: var(--accent-hover);
 }
 
 .sidebar-dropdown {
-    display: flex;
-    flex-direction: column;
-    margin-left: 20px;
+  margin-top: 10px;
+  background-color: var(--primary-bg);
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .sidebar-dropdown a {
-    color: #fff;
-    text-decoration: none;
-    padding: 5px 0;
+  display: block;
+  padding: 10px;
+  color: var(--primary-text);
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
 .sidebar-dropdown a:hover {
-    text-decoration: underline;
+  background-color: var(--secondary-bg);
+  color: var(--link-hover);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
 }

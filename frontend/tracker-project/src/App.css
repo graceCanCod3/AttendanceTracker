@@ -1,78 +1,184 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
   font-family: Arial, sans-serif;
+  line-height: 1.6;
+  width: 100vw;
 }
 
-header {
-  background-color: #333;
-  color: white;
-  padding: 1rem;
-}
 
-header nav a {
-  color: white;
-  margin: 0 1rem;
-  text-decoration: none;
-}
-
-.Nav {
-  display: flex;
-}
-.dropdown {
-  position: relative;
-  display: inline-block;
-  margin-right: 20px;
-}
-.dropdown-content {
-  display: block;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
-}
-
-main {
-  padding: 1rem;
-}
-
-footer {
-  background-color: #333;
-  color: white;
+#root {
+  /* max-width: 1280px; */
+  /* margin: 0 auto;
+  padding: 2rem; */
+  --header-height: 60px;
+  --sidebar-width: 250px;
+  --max-content-width: 1200px;
   text-align: center;
-  padding: 1rem;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+.header {
   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  z-index: 1000;
+}
+
+  /* .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #FFF0E5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+   */
+  .logo {
+    height: 80px;
+    cursor: pointer;
+  }
+  
+  /* .header .searchForm {
+    display: flex;
+    flex-grow: 1;
+    max-width: 500px;
+    margin: 0 20px;
+  }
+  
+  .header .searchBar {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #FF9966;
+    border-radius: 5px 0 0 5px;
+    font-size: 1em;
+    left: 29px;
+  }
+  
+  .header .searchBtn {
+    padding: 10px 20px;
+    background-color: #FF9966;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .searchBtn:hover {
+    background-color: #FF7F40;
+  }
+  
+  .headerLinks {
+    display: flex;
+    align-items: center;
+  }
+  
+  .headerLinks button {
+    margin-left: 15px;
+    padding: 8px 15px;
+    background-color: transparent;
+    color: #4A4A4A;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .headerLinks button:hover {
+    color: #FF9966;
+  }
+   */
+.main-container {
+  display: flex;
+  flex-grow: 1;
+  margin-top: var(--header-height);
+  justify-content: center;
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  height: calc(100vh - var(--header-height));
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  overflow-y: auto;
+}
+
+.main-content {
+  flex-grow: 1;
+  margin-left: var(--sidebar-width);
+  padding: 20px;
+  min-height: calc(100vh - var(--header-height));
+  overflow-y: auto;
+  max-width: calc(var(--max-content-width) - var(--sidebar-width));
   width: 100%;
-  bottom: 0;
 }
 
 @media (max-width: 768px) {
-  header nav {
-    display: flex;
+  .main-container {
     flex-direction: column;
-    align-items: center;
   }
 
-  header nav a {
-    margin: 0.5rem 0;
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
   }
 
-  main {
-    padding: 0.5rem;
+  .main-content {
+    margin-left: 0;
+    width: 100%;
   }
 }
+
+
+.logo {
+  height: 7em;
+  width: 9em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em gold);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em gold);
+}
+
+
+
+/* @keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+} */

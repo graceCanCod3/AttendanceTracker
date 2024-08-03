@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from "react-router-dom"
 const login = () => {
     let navigate = useNavigate();
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [message, setMessage] = useState('');
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [message, setMessage] = useState('')
   
     const handleSubmit = async (e) => {
-      e.preventDefault();
+      e.preventDefault()
       try {
-        const response = await axios.get('http://localhost:8000/api/customusers/', { username, password });
-            setMessage(response.data.message);
-            navigate('/');
+        const response = await axios.get('http://localhost:8000/api/customusers/', { username, password })
+            setMessage(response.data.message)
+            navigate('/')
       } catch (error) {
-         setMessage('Login failed');
-          console.error('Error:', error);
+         setMessage('Login failed')
+          console.error('Error:', error)
           }
         };
     return (
