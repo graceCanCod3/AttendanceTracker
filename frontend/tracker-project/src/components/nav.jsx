@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import './sidebar.css';
 
 export default function Nav() {
     const [parents, setParents] = useState([]);
@@ -32,13 +33,13 @@ export default function Nav() {
     }, []);
 
     return (
-        <div className="Nav">
-            <div className="dropdown">
+        <div className="sidebar">
+            <div className="sidebar-section">
                 <button onClick={() => setShowStudentsDropdown(!showStudentsDropdown)}>
                     Students
                 </button>
                 {showStudentsDropdown && (
-                    <div className="dropdown-content">
+                    <div className="sidebar-dropdown">
                         {students.map(student => (
                             <Link key={student.id} to={`/students/${student.id}`}>
                                 {student.first_name} {student.last_name}
@@ -48,12 +49,12 @@ export default function Nav() {
                 )}
             </div>
 
-            <div className="dropdown">
+            <div className="sidebar-section">
                 <button onClick={() => setShowParentsDropdown(!showParentsDropdown)}>
                     Parents
                 </button>
                 {showParentsDropdown && (
-                    <div className="dropdown-content">
+                    <div className="sidebar-dropdown">
                         {parents.map(parent => (
                             <Link key={parent.id} to={`/parentcontacts/${parent.id}`}>
                                 {parent.first_name} {parent.last_name}

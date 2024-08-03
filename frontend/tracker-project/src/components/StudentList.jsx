@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+// import Carousel from 'react-bootstrap/Carousel'
+
 
 const StudentList = ({user, setUser}) => {
   const [students, setStudents] = useState([])
@@ -42,8 +44,8 @@ const StudentList = ({user, setUser}) => {
 
   return (
     <div className='students'>
-      <h1>Students</h1>
-      <h2>Nice to have you back {user.username}</h2>
+      <h1>Enrolled Students</h1>
+      <h2>{user.username}</h2>
       {/* <Link to="/add-student">Add Student</Link> */}
       <ul>
         {students.map((student) => (

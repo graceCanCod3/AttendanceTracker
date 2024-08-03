@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import Levenshtein from 'fast-levenshtein';
 import Logo from '../assets/Logo.svg';
+import User from '../assets/User.svg'
 import './header.css';
 
 export default function Header() {
@@ -168,7 +169,7 @@ export default function Header() {
                 <button onClick={() => navigate('/classsessions/')}>Class Sessions</button>
                 {loggedInUser ? (
                     <div className="userMenu" ref={userMenuRef}>
-                        <img onClick={toggleUserMenu} src={userData.avatar || 'path/to/default/avatar.png'} alt="User Icon" />
+                        <img onClick={toggleUserMenu} src={userData.avatar || User} alt="User Icon" />
                         {showUserMenu && (
                             <ul className="dropdown">
                                 <li onClick={() => navigate(`/instructors/`)}>Instructors</li>
